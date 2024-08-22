@@ -1,17 +1,17 @@
 import React,{useCallback} from 'react'
-import {Button,Input,RTE,Select} from '../index'
+import {Button,Input,RTE,Select} from '..'
 import { useForm } from 'react-hook-form'
 import service from '../../appwrite/config'
 import { useNavigate } from 'react-router-dom'
 import { useSelector } from 'react-redux'
 
-export default function PostForm({post}) {
+export default function PostForm({ post }) {
     const {register, handleSubmit, watch, control,setValue, getValues} = useForm({
         defaultValues:{
-            title:post?.title || '',
-            slug:post?.$id || '',
-            content:post?.content ||'',
-            status:post?.status ||'active',
+            title: post?.title || '',
+            slug: post?.$id || '',
+            content: post?.content ||'',
+            status: post?.status ||'active',
         },
     });
     const navigate = useNavigate()

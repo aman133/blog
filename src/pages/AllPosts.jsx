@@ -1,11 +1,13 @@
-import React from 'react'
+import React,{useState,useEffect} from 'react'
 import service from '../appwrite/config'
 import { Container,PostCard } from '../components'
 function AllPosts() {
-    const [post, setPost] = React.useState([])
-    React.useEffect(()=>{},[])
+    const [post, setPost] = useState([])
+    useEffect(()=>{},[])
     service.getPosts([]).then((post)=>{
-        if(post) setPost(post.documents)
+        if(post) {
+            setPost(post.documents)
+            }
         })
   return (
     <div className='py-8 w-full'>
