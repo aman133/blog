@@ -49,33 +49,26 @@ export default function PostForm({post}) {
 
     }
 
-    const slugTransform =  useCallback((value)=>{
-        // if(value && typeof value === 'string'){
-        //     const slug = value.toLowerCase().replace(/ /g,'-')
-        //     setValue('slug',slug)
-        //     return slug
-        // }
-        if(value && typeof value === 'string'){
+    const slugTransform = useCallback((value) => {
+        if (value && typeof value === "string")
             return value
-            .trim()
-            .toLowerCase()
-            .replace(/^[a-zA-Z\d\s]+/g,'-')
-            .replace(/\s/g,'-')
-        }
-        return ''
-    },[]);
+                .trim()
+                .toLowerCase()
+                .replace(/[^a-zA-Z\d\s]+/g, "-")
+                .replace(/\s/g, "-");
 
-    React.useEffect(()=>{
-        const subsription = watch((value,{name})=>{
-            if(name==='title'){
-                setValue('slug',slugTransform(value.title),{shouldValidate:true});
+        return "";
+    }, []);
+
+    React.useEffect(() => {
+        const subscription = watch((value, { name }) => {
+            if (name === "title") {
+                setValue("slug", slugTransform(value.title), { shouldValidate: true });
             }
         });
 
-        return () =>{
-            subsription.unsubscribe()
-        }
-    },[watch,slugTransform,setValue])
+        return () => subscription.unsubscribe();
+    }, [watch, slugTransform, setValue]);
   return (
     <form onSubmit={handleSubmit(submit)} className="flex flex-wrap">
             <div className="w-2/3 px-2">
