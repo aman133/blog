@@ -1,3 +1,4 @@
+import { Analytics } from "@vercel/analytics/react"
 import { useState,useEffect } from 'react'
 import authService from './appwrite/auth'
 import { login,logout } from './store/authSlice'
@@ -31,6 +32,7 @@ function App() {
           <Outlet/>
         </main>
         <Footer/>
+        <Analytics/>
       </div>
     </div>
   ) : null
