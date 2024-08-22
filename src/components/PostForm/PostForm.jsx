@@ -18,7 +18,7 @@ export default function PostForm({post}) {
     const userData = useSelector(state=>state.auth.userData)
     const submit = async (data)=>{
         if(post){
-            const file = data.image[0]?service.uploadFile(data.image[0]):null
+            const file = data.image[0]? await service.uploadFile(data.image[0]):null
 
             if(file){
                 service.deleteFile(post.featureImage)
@@ -27,7 +27,7 @@ export default function PostForm({post}) {
             const dbPost = await service.updatePost(post.$id,{
                 ...data,
                 featureImage: file ? file.$id : undefined,
-            })
+            }); 
             if(dbPost){
                 navigate(`/post/${dbPost.$id}`)
             }
@@ -47,7 +47,7 @@ export default function PostForm({post}) {
             }
         }
 
-    }
+    };
 
     const slugTransform = useCallback((value) => {
         if (value && typeof value === "string")
