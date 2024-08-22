@@ -117,6 +117,6 @@ export default function PostForm({post}) {
                 </Button>
             </div>
         </form>
-  )
+  );
 }
 
